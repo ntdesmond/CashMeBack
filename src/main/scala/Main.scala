@@ -1,16 +1,12 @@
 package io.github.ntdesmond.cashmeback
 
-import zio._
-import zio.Console._
+import zio.{Task, ZIO, ZIOAppDefault}
 
-object Main extends ZIOAppDefault {
+object Main extends ZIOAppDefault:
 
-  def run = myAppLogic
-
-  val myAppLogic =
-    for {
-      _ <- printLine("Hello! What is your name?")
-      name <- readLine
-      _ <- printLine(s"Hello, ${name}, welcome to ZIO!")
-    } yield ()
-}
+  def run: Task[Unit] = {
+    for
+      config <- ZIO.service[AppConfig]
+      _ <- zio.Console.printLine(config)
+    yield ()
+  }.provide(AppConfig.live)

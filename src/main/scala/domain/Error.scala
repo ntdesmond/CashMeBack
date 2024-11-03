@@ -5,6 +5,5 @@ import scala.util.control.NoStackTrace
 
 trait Error extends NoStackTrace
 
-object Error {
+object Error:
   case object NoBuySlots extends Error
-}
